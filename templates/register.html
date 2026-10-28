@@ -1,0 +1,13 @@
+{% extends "base.html" %}{% block title %}Create Account | HDAR{% endblock %}{% block content %}
+<section class="auth-layout"><div class="auth-aside"><a class="back" href="{{ url_for('index') }}">← Back to HDAR</a><span class="eyebrow">BECOME A MEMBER</span><h1>Your HDAR<br><em>account starts here.</em></h1><p>Fill in the details below. If you were invited, your referral code will already be filled in.</p><div class="bonus-card"><span>WELCOME CREDIT · DEMO</span><strong>UGX 3,000</strong><small>For local testing only; not withdrawable cash.</small></div><div class="aside-links"><a href="https://t.me/+kbjx1aPY7N9jMGE0" target="_blank" rel="noopener noreferrer">Telegram community ↗</a></div></div>
+<div class="auth-card"><span class="eyebrow">CREATE YOUR ACCOUNT</span><h2>Register with HDAR</h2><p class="muted">Complete the form to get started.</p><form method="post" class="form">
+<label>Full name<input name="full_name" maxlength="80" required autocomplete="name" value="{{ request.form.get('full_name','') }}" placeholder="Enter your full name"></label>
+<label>Username<input name="username" minlength="3" maxlength="30" required autocomplete="username" value="{{ request.form.get('username','') }}" placeholder="Create a username"></label>
+<label>Mobile money number<input name="phone" required inputmode="tel" autocomplete="tel" value="{{ request.form.get('phone','') }}" placeholder="e.g. 0771234567"></label>
+<label>Country<select name="country" required>{% for country in ['Uganda','Kenya','Tanzania','Rwanda','Other'] %}<option value="{{ country }}" {% if request.form.get('country','Uganda')==country %}selected{% endif %}>{{ country }}</option>{% endfor %}</select></label>
+<label>Create password<input type="password" name="password" minlength="8" required autocomplete="new-password" placeholder="At least 8 characters"></label>
+<label>Referral code <span class="optional">Optional</span><input name="referral_code" maxlength="32" value="{{ ref }}" placeholder="Referral code"></label>
+<p class="invite-note">{% if ref %}You were invited with code <strong>{{ ref }}</strong>.{% else %}Have an invite code? Add it above to link your registration to the inviter.{% endif %}</p>
+<label class="terms"><input type="checkbox" required> I confirm the details I entered are correct.</label>
+<button class="button full" type="submit">Create Account <span>→</span></button></form><p class="form-foot">Already registered? <a href="{{ url_for('login') }}">Login here</a></p><div class="social-links"><a href="https://t.me/+kbjx1aPY7N9jMGE0" target="_blank" rel="noopener noreferrer">Telegram community</a></div></div></section>
+{% endblock %}

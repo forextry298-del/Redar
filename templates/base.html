@@ -1,0 +1,7 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#102a43"><title>{% block title %}HDAR{% endblock %}</title><link rel="stylesheet" href="{{ url_for('static',filename='style.css') }}"></head>
+<body><header class="nav"><a class="brand" href="{{ url_for('index') }}"><span>✦</span> HDAR</a><nav><a href="{{ url_for('index') }}">Home</a>{% if g.user %}<a href="{{ url_for('dashboard') }}">Dashboard</a><form method="post" action="{{ url_for('logout') }}"><button class="navbtn">Logout</button></form>{% else %}<a href="{{ url_for('login') }}">Login</a><a class="nav-cta" href="{{ url_for('register') }}">Register</a>{% endif %}</nav></header>
+<main class="container">{% with msgs=get_flashed_messages(with_categories=true) %}{% if msgs %}<div class="messages">{% for cat,msg in msgs %}<div class="message {{ cat }}">{{ msg }}</div>{% endfor %}</div>{% endif %}{% endwith %}{% block content %}{% endblock %}</main>
+{% if session.pop('show_welcome', false) %}<div class="modal" id="welcomeModal"><section class="modal-card"><div class="mark">✦</div><h2>Welcome to HDAR!</h2><p>Your demo account is ready. Join the community to stay connected.</p><a class="button telegram" href="https://t.me/+kbjx1aPY7N9jMGE0" target="_blank" rel="noopener noreferrer">Join Telegram</a><button class="button secondary" onclick="document.getElementById('welcomeModal').remove()">Close</button></section></div>{% endif %}
+</body></html>
